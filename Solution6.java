@@ -67,7 +67,7 @@ public class Solution6 {
         }
         //保证favoriteCompanies[i] 中的所有字符串各不相同
         for (int i = 0; i < n; i++) {
-            HashSet<String> temp = new HashSet<>(favoriteCompanies.get(i));
+            Set<String> temp = new HashSet<>(favoriteCompanies.get(i));
             if(temp.size()!=favoriteCompanies.get(i).size()){
                 throw new IllegalArgumentException("每个用户的公司清单不能出现重复的公司");
             }
@@ -110,7 +110,11 @@ public class Solution6 {
                 if (i == j) {
                     continue;
                 }
-                isSub |= check(favoriteCompanies, i, j);
+                //检查favoriteCompanies中下标为j的集合是否包含favoriteCompanies中下标为i的集合
+                if(check(favoriteCompanies, i, j)){
+                    isSub=true;
+                    break;
+                }
             }
             if (!isSub) {
                 ans.add(i);
